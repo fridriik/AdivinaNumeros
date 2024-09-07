@@ -1,0 +1,15 @@
+  .theme-toggle-button {
+    display: flex;
+    align-items: center;
+    border: none;
+    padding: 10px;
+    font-size: 1em;
+    cursor: pointer;
+  }
+  
+ .material-icons {
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+  
