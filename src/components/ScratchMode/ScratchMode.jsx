@@ -51,7 +51,7 @@ const ScratchMode = ({
                 scratched[number - 1] && number === secretNumber ? 'correct' : ''
                 }`}
               >
-                {scratched[number - 1] ? number : '?'}
+                {number}
               </button>
             ))}
           </div>
