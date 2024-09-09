@@ -40,6 +40,9 @@ const ScratchMode = ({
       <div className='display-container-grid'>
         <Message message={message} messageClass={messageClass} />
         <ScoreBoard score={score} highScore={highScore} />
+        <div>
+            <ScratchControls resetGame={resetGame} gameOver={gameOver} />
+        </div>
         <div className='scratch-mode'>
           <div className='scratch-grid'>
             {Array.from({ length: 20 }, (_, i) => i + 1).map((number) => (
@@ -54,9 +57,6 @@ const ScratchMode = ({
                 {number}
               </button>
             ))}
-          </div>
-          <div>
-            <ScratchControls resetGame={resetGame} gameOver={gameOver} />
           </div>
         </div>
       </div>

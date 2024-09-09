@@ -30,7 +30,6 @@ const ClassicMode = ({
   return (
     <div className='display-main'>
       <div className='display-container'>
-        <SecretNumberDisplay gameOver={gameOver} secretNumber={secretNumber} isCorrect={isCorrect} />
       <div>
         <Message message={message} messageClass={messageClass} />
         <ScoreBoard score={score} highScore={highScore} />
@@ -43,6 +42,7 @@ const ClassicMode = ({
           gameOver={gameOver} 
         />
       </div>
+      <SecretNumberDisplay gameOver={gameOver} secretNumber={secretNumber} isCorrect={isCorrect} />
     </div>
   </div>
   );
