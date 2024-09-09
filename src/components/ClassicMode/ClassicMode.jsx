@@ -29,22 +29,22 @@ const ClassicMode = ({
 
   return (
     <div className='display-main'>
-      <SecretNumberDisplay gameOver={gameOver} secretNumber={secretNumber} isCorrect={isCorrect} />
+      <div className='display-container'>
+        <SecretNumberDisplay gameOver={gameOver} secretNumber={secretNumber} isCorrect={isCorrect} />
+      <div>
+        <Message message={message} messageClass={messageClass} />
+        <ScoreBoard score={score} highScore={highScore} />
+      </div>
       <div className='display-game'>
-        <div>
-          <Message message={message} messageClass={messageClass} />
-          <ScoreBoard score={score} highScore={highScore} />
-        </div>
-        <div>
-          <GuessInput guess={guess} setGuess={setGuess} gameOver={gameOver} />
-          <ClassicControls 
-            handleGuess={onSubmitGuess} 
-            resetGame={resetGame} 
-            gameOver={gameOver} 
-          />
-        </div>
+        <GuessInput guess={guess} setGuess={setGuess} gameOver={gameOver} />
+        <ClassicControls 
+          handleGuess={onSubmitGuess} 
+          resetGame={resetGame} 
+          gameOver={gameOver} 
+        />
       </div>
     </div>
+  </div>
   );
 };
 

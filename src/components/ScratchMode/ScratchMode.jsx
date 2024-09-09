@@ -36,30 +36,30 @@ const ScratchMode = ({
   };
 
   return (
-    <div className='display-main'>
-      <div className='scratch-mode'>
-      <div className='scratch-grid'>
-        {Array.from({ length: 20 }, (_, i) => i + 1).map((number) => (
-          <button
-            key={number}
-            onClick={() => handleScratch(number)}
-            disabled={scratched[number - 1] || gameOver}
-            className={`scratch-button ${scratched[number - 1] ? 'scratched' : ''} ${
-              scratched[number - 1] && number === secretNumber ? 'correct' : ''
-            }`}
-          >
-            {scratched[number - 1] ? number : '?'}
-          </button>
-        ))}
-      </div>
-      <div className='display-manual'>
+    <div className='display-main-grid'>
+      <div className='display-container-grid'>
         <Message message={message} messageClass={messageClass} />
         <ScoreBoard score={score} highScore={highScore} />
+        <div className='scratch-mode'>
+          <div className='scratch-grid'>
+            {Array.from({ length: 20 }, (_, i) => i + 1).map((number) => (
+              <button
+                key={number}
+                onClick={() => handleScratch(number)}
+                disabled={scratched[number - 1] || gameOver}
+                className={`scratch-button ${scratched[number - 1] ? 'scratched' : ''} ${
+                scratched[number - 1] && number === secretNumber ? 'correct' : ''
+                }`}
+              >
+                {scratched[number - 1] ? number : '?'}
+              </button>
+            ))}
+          </div>
+          <div>
+            <ScratchControls resetGame={resetGame} gameOver={gameOver} />
+          </div>
+        </div>
       </div>
-      <div>
-        <ScratchControls resetGame={resetGame} gameOver={gameOver} />
-      </div>
-    </div>
     </div>
   );
 };

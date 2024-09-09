@@ -1,16 +1,21 @@
-.scratch-mode {
-    background-color: var(--container-color);
-    border-radius: 16px;
-    box-shadow: 0 0 16px var(--text-color);
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-  }
-  
+.display-main-grid{
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.display-container-grid{
+  background-color: var(--container-color);
+  border-radius: 16px;
+  box-shadow: 0 0 16px var(--text-color);
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
   .scratch-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 4px;
+    grid-template-columns: repeat(4, 1fr);
   }
   
   .scratch-button {
@@ -62,23 +67,14 @@
     flex-direction: column;
   }
 
-  @media (min-width: 768px) {
-    .scratch-grid{
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-    }
-  }
-
-  @media (min-width: 1024px) {
+  @media (min-width: 500px) {
     .scratch-grid{
       grid-template-columns: repeat(5, 1fr);
-      gap: 8px;
     }
   }
 
   @media (min-width: 1444px) {
     .scratch-grid{
       grid-template-columns: repeat(10, 1fr);
-      gap: 16px;
     }
   }

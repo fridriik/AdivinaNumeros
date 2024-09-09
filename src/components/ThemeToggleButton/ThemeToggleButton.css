@@ -3,17 +3,18 @@
 }
 
 .change-theme {
-  display: block; 
+  display: flex;
   cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 
 @media (min-width: 768px) {
   .change-theme {
-    display: flex;
     justify-content: space-between;
-    align-items: center;
-    gap: 8px;
+    gap: 16px;
   }
 
   .material-icons {
