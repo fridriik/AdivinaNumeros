@@ -8,7 +8,9 @@ const SecretNumberDisplay = ({ gameOver, secretNumber, isCorrect }) => {
 
   return (
     <div className={circleClass}>
-      {gameOver ? secretNumber : '?'}
+      <h2>
+        {gameOver ? secretNumber : '?'}
+      </h2>
     </div>
   );
 };

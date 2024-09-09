@@ -1,16 +1,19 @@
 /* Global Styles */
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Urbanist", sans-serif;  
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: 500;
 
-  --bg-text-color-light: #fafafa;
+  --bg-text-color-light: #eaeaea;
   --bg-text-color-dark: #303030;
+  --cont-dark-color: #202020;
+  --cont-light-color: #fafafa;
   --accent-color: #3232ff;
-  --error-color: #ff3232;
-  --confirm-color: #32ff32;
+  --error-color: #ff3030;
+  --confirm-color: #30ff30;
   --bg-color: var(--bg-text-color-light);
   --text-color: var(--bg-text-color-dark);
+  --container-color: var(--cont-light-color);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -21,19 +24,29 @@
 [data-theme='light'] {
   --bg-color: var(--bg-text-color-light);
   --text-color: var(--bg-text-color-dark);
+  --container-color: var(--cont-light-color);
 }
 
 [data-theme='dark'] {
   --bg-color: var(--bg-text-color-dark);
   --text-color: var(--bg-text-color-light);
+  --container-color: var(--cont-dark-color);
+
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
+
 
 body {
   margin: 0;
   display: flex;
-  place-items: center;
   min-width: 320px;
+  max-width: 100vw;
   min-height: 100vh;
+  scrollbar-width: none;
+  overflow-y: scroll;
   color: var(--text-color);
   background-color: var(--bg-color);
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -47,34 +60,38 @@ header {
 
 h1 {
   font-size: 3.2em;
-  line-height: 1.1;
   color: var(--text-color);
+  margin: 0;;
+}
+
+h2 {
+  font-size: 2.7em;
 }
 
 button {
   border-radius: 8px;
   padding: 0.6em 1.2em;
   font-size: 1em;
-  font-weight: 500;
+  font-weight: 700;
   font-family: inherit;
   color: var(--bg-color);
   background-color: var(--text-color);
   cursor: pointer;
   transition: background-color 0.25s ease, border-color 0.25s ease;
+  padding: 16px;
+  margin: 16px;
+  cursor: pointer;
 }
 
-button:hover {
+button:hover{
+  box-shadow: 0 0 16px var(--text-color);
   background-color: var(--bg-color);
   color: var(--text-color);
-  box-shadow: 0 0 0 1px var(--accent-color);
 }
 
-a {
-  font-weight: 500;
-  color: var(--accent-color);
-  text-decoration: none;
-}
-
-a:hover {
+button:disabled{
+  background-color: var(--error-color);
   color: var(--text-color);
+  cursor: not-allowed;
+  box-shadow: 0 0 0 0 var(--text-color);
 }

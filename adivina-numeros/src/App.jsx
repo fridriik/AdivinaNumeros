@@ -1,16 +1,12 @@
 import { useState } from 'react';
-import './App.css';
-import GuessInput from './components/GuessInput/GuessInput';
-import Message from './components/Message/Message';
-import ScoreBoard from './components/ScoreBoard/ScoreBoard';
-import GameControls from './components/GameControls/GameControls';
 import Header from './components/Header/Header';
-import SecretNumberDisplay from './components/SecretNumberDisplay/SecretNumberDisplay';
-
+import ClassicMode from './components/ClassicMode/ClassicMode';
+import ScratchMode from './components/ScratchMode/ScratchMode';
+import './App.css'
 
 const App = () => {
   const [guess, setGuess] = useState('');
-  const [message, setMessage] = useState('Ingresa un número del 1 al 20 en el campo para ver si adivinas');
+  const [message, setMessage] = useState('Ingresa un número del 1 al 20 en el campo');
   const [messageClass, setMessageClass] = useState('');
   const [score, setScore] = useState(20);
   const [highScore, setHighScore] = useState(0);
@@ -18,7 +14,13 @@ const App = () => {
   const [gameOver, setGameOver] = useState(false);
   const [secretNumber, setSecretNumber] = useState(Math.floor(Math.random() * 20) + 1);
   const [isCorrect, setIsCorrect] = useState(false);
+  const [mode, setMode] = useState('classic');
+  const [resetKey, setResetKey] = useState(0);
 
+  const toggleMode = () => {
+    setMode(prevMode => prevMode === 'classic' ? 'scratch' : 'classic');
+    resetGame();
+  };
 
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
@@ -26,8 +28,14 @@ const App = () => {
     document.documentElement.setAttribute('data-theme', newTheme);
   };
 
-  const handleGuess = () => {
-    const guessNumber = parseInt(guess);
+  const handleGuess = (guessNumber) => {
+    console.log(`Mode: ${mode}, Guess received: ${guessNumber}, Type: ${typeof guessNumber}`);
+
+    if (isNaN(guessNumber)) {
+      console.log('Error: guessNumber no es un número válido');
+      return;
+    }
+
     if (guessNumber === secretNumber) {
       setMessage(`¡Correcto! El número secreto es ${secretNumber}`);
       setMessageClass('correct');
@@ -40,8 +48,7 @@ const App = () => {
       setMessage('¡Muy bajo! Intenta un número más alto');
       setMessageClass('incorrect');
       setScore(score - 1);
-    }
-    else {
+    } else {
       setMessage('¡Muy alto! Intenta un número más bajo');
       setMessageClass('incorrect');
       setScore(score - 1);
@@ -56,30 +63,54 @@ const App = () => {
 
   const resetGame = () => {
     setGuess('');
-    setMessage('');
+    setMessage('Ingresa un número del 1 al 20 en el campo');
     setMessageClass('');
     setScore(20);
     setGameOver(false);
     setSecretNumber(Math.floor(Math.random() * 20) + 1);
+    setIsCorrect(false);
+    setResetKey(prevKey => prevKey + 1);
   };
 
   return (
     <div className="App">
-      <Header theme={theme} toggleTheme={toggleTheme} />
-      <div>
-        <h1>Adivinar el Número (entre 1 y 20)</h1>
-        <SecretNumberDisplay gameOver={gameOver} secretNumber={secretNumber} isCorrect={isCorrect} />
-      </div>
-      <div className='display-game'>
-        <div>
-          <Message message={message} messageClass={messageClass} />
-          <ScoreBoard score={score} highScore={highScore} />
-        </div>
-        <div>
-          <GuessInput guess={guess} setGuess={setGuess} gameOver={gameOver} />
-          <GameControls handleGuess={handleGuess} resetGame={resetGame} gameOver={gameOver} />
-        </div>
-      </div>
+      <Header 
+        theme={theme}
+        toggleTheme={toggleTheme}
+        mode={mode}
+        toggleMode={toggleMode}
+      />
+      <h1>Adivina el número (entre 1 y 20)</h1>
+      {mode === 'classic' && (
+        <ClassicMode
+          key={`classic-${resetKey}`}
+          gameOver={gameOver}
+          secretNumber={secretNumber}
+          isCorrect={isCorrect}
+          guess={guess}
+          setGuess={setGuess}
+          message={message}
+          messageClass={messageClass}
+          score={score}
+          highScore={highScore}
+          handleGuess={(num) => handleGuess(num)}
+          resetGame={resetGame}
+        />
+      )}
+      {mode === 'scratch' && (
+        <ScratchMode
+          key={`scratch-${resetKey}`}
+          gameOver={gameOver}
+          secretNumber={secretNumber}
+          setGuess={setGuess}
+          message={message}
+          messageClass={messageClass}
+          score={score}
+          highScore={highScore}
+          handleGuess={(num) => handleGuess(num)}
+          resetGame={resetGame}
+        />
+      )}
     </div>
   );
 };

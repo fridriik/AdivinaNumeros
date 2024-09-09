@@ -8,7 +8,10 @@ const ThemeToggleButton = () => {
   };
 
   return (
-    <span onClick={toggleTheme} className="material-icons">light_mode</span>
+    <div className='change-theme' onClick={toggleTheme}>
+      <h4>Cambiar tema</h4>
+      <span className="material-icons">light_mode</span>
+    </div>
   );
 };
 

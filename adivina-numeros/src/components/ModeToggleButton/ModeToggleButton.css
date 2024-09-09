@@ -2,14 +2,14 @@
   font-size: 24px;
 }
 
-.change-theme {
+.change-mode {
   display: block; 
   cursor: pointer;
 }
 
 
 @media (min-width: 768px) {
-  .change-theme {
+  .change-mode {
     display: flex;
     justify-content: space-between;
     align-items: center;
